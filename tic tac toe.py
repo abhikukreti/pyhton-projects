@@ -1,5 +1,3 @@
-# Tic-Tac-Toe
-
 # Create the board
 board = [' ' for _ in range(9)]
 
@@ -39,29 +37,33 @@ def is_game_over():
 
 # Function to play the game
 def play_game():
-    current_player = 'X'
+    player1 = input("Enter Player 1's name: ")
+    player2 = input("Enter Player 2's name: ")
+    sign1 = 'X'
+    sign2 = 'O'
+    current_player = player1
     game_over = False
 
     while not game_over:
         display_board()
-        position = int(input("Player {} - Enter a position (1-9): ".format(current_player)))
+        position = int(input("{} ({}): Enter a position (1-9): ".format(current_player, sign1 if current_player == player1 else sign2)))
 
         # Check if the position is valid
         while position < 1 or position > 9 or board[position - 1] != ' ':
             print("Invalid position. Please try again.")
-            position = int(input("Player {} - Enter a position (1-9): ".format(current_player)))
+            position = int(input("{} ({}): Enter a position (1-9): ".format(current_player, sign1 if current_player == player1 else sign2)))
 
-        board[position - 1] = current_player
+        board[position - 1] = sign1 if current_player == player1 else sign2
 
         if is_game_over():
             display_board()
             if ' ' not in board:
                 print("It's a tie!")
             else:
-                print("Player {} wins!".format(current_player))
+                print("{} wins!".format(current_player))
             game_over = True
 
-        current_player = 'O' if current_player == 'X' else 'X'
+        current_player = player2 if current_player == player1 else player1
 
 # Start the game
 play_game()
